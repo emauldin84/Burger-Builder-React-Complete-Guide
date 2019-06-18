@@ -61,6 +61,8 @@ class BurgerBuilder extends Component {
         const disabledInfo = {
             ...this.state.ingredients
         }
+        // reassigning ingredient key values to true or false weather they are lessthan or equal to 0
+        // will set 'disable' to 'true' if lessthan or equal to 0 and to 'false' otherwise
         for(let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
@@ -71,6 +73,7 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
+                    price={this.state.totalPrice}
                     />
             </Aux>
         );
