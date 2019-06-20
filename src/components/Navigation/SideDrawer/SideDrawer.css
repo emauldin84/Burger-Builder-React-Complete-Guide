@@ -19,11 +19,11 @@
 }
 
 .Open {
-    transform: (translateX(0));
+    transform: translateX(0);
 }
 
-.Closed {
-    transform: (translateX(-100%));
+.Close {
+    transform: translateX(-100%);
 
 }
 
