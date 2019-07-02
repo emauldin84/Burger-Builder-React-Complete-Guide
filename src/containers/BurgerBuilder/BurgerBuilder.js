@@ -28,6 +28,8 @@ class BurgerBuilder extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
+
         axios.get('https://react-burger-builder-d703d.firebaseio.com/ingredients.json')
             .then(response => {
                 this.setState({
@@ -98,30 +100,16 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler =() => {
         // alert('You Continued!')
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            // in a production app you should calculate price on the backend to avoid the likelyhood of users manipulating the price on purchse
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Eric Mauldin',
-                address: {
-                    street:'123 Street Ave',
-                    zipCode: '30312',
-                    country: 'USA',
-                },
-                email: 'eric@test.com'
-            },
-            deliveryMethod: 'fastest'
+        const queryParams = []
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
-        // must add .json to end of url for Firebase
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({ loading: false, purchasing: false })
-            })
-            .catch(error => {
-                this.setState({ loading: false, purchasing: false })
-            })
+        queryParams.push('price=' + this.state.totalPrice)
+        const queryString = queryParams.join('&')
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        })
     }
 
     render() {
