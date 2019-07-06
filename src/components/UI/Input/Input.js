@@ -46,11 +46,17 @@ const input = (props) => {
                 onChange={props.changed}/>
     }
 
+    let validationError = null
+    if (props.invalid && props.touched) {
+        validationError = <p className={classes.ValidationError}>This field is required. Please enter a valid {props.valueType}.</p>
+    }
+
     return (
 
         <div className={classes.Input}>
             <label className={classes.Label}>{props.label}</label>
             {inputElement}
+            {validationError}
         </div>
 
     )
