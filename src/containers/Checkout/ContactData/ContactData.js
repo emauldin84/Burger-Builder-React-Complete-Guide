@@ -69,10 +69,15 @@ class ContactData extends Component {
     orderHandler = (event) => {
         event.preventDefault()
         this.setState({loading: true})
+        const formData = {}
+        for (let formElementId in this.state.orderForm) {
+            formData[formElementId] = this.state.orderForm[formElementId].value
+        }
         const order = {
             ingredients: this.props.ingredients,
             // in a production app you should calculate price on the backend to avoid the likelyhood of users manipulating the price on purchse
             price: this.props.price,
+            orderData: formData
             
         }
         // must add .json to end of url for Firebase
@@ -87,6 +92,7 @@ class ContactData extends Component {
     }
 
     inputChangedHandler = (event, inputId) => {
+        // required to immutably update form element state
         const updatedOrderForm = {
             ...this.state.orderForm
         }
@@ -107,7 +113,7 @@ class ContactData extends Component {
             })
         }
         let form = (
-            <form>
+            <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement => (
                     <Input 
                         key={formElement.id}
@@ -116,7 +122,7 @@ class ContactData extends Component {
                         value={formElement.config.value}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
                 ))}
-                <Button btnType='Success' clicked={this.orderHandler}>Order</Button>
+                <Button btnType='Success'>Order</Button>
             </form>
         )
         if (this.state.loading) {
