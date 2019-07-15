@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from '../../../axios-orders'
 
+import { connect } from 'react-redux'
+
 import Button from '../../../components/UI/Button/Button'
 import classes from './ContactData.css'
 import Spinner from '../../../components/UI/Spinner/Spinner'
@@ -108,7 +110,7 @@ class ContactData extends Component {
             formData[formElementId] = this.state.orderForm[formElementId].value
         }
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             // in a production app you should calculate price on the backend to avoid the likelyhood of users manipulating the price on purchse
             price: this.props.price,
             orderData: formData
@@ -206,4 +208,11 @@ class ContactData extends Component {
 
 }
 
-export default ContactData
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(ContactData)
