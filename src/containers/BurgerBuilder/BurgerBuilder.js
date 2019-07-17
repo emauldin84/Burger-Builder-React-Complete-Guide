@@ -61,7 +61,7 @@ class BurgerBuilder extends Component {
 
     render() {
         const disabledInfo = {
-            ...this.state.ingredients
+            ...this.props.ings
         }
         // reassigning ingredient key values to true or false weather they are lessthan or equal to 0
         // will set 'disable' to 'true' if lessthan or equal to 0 and to 'false' otherwise
