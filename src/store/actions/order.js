@@ -17,8 +17,15 @@ export const purchaseBurgerFail = (error) => {
     }
 }
 
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurgerStart = () => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_START,
+    }
+}
+
+export const purchaseBurger = (orderData) => {
     return dispatch => {
+        dispatch(purchaseBurgerStart())
         // must add .json to end of url for Firebase
         axios.post('/orders.json', orderData)
             .then(response => {
