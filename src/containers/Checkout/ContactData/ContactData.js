@@ -116,15 +116,7 @@ class ContactData extends Component {
             orderData: formData
             
         }
-        // must add .json to end of url for Firebase
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({ loading: false, })
-                this.props.history.push('/')
-            })
-            .catch(error => {
-                this.setState({ loading: false, })
-            })
+        
     }
 
     checkValidity(value, rules) {
