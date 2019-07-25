@@ -27,6 +27,7 @@ export const logout = () => {
     }
 }
 
+// implements autologout when token expires
 export const checkAuthTimeout = (expirationTime) => {
     return dispatch => {
         setTimeout(() => {
