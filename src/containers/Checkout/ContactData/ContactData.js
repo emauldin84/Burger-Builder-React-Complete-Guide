@@ -95,7 +95,7 @@ class ContactData extends Component {
                 value: 'fastest',
                 validation: {},
                 valid: true,
-            }
+            },
         },
         formIsValid: false,
 
@@ -113,7 +113,8 @@ class ContactData extends Component {
             ingredients: this.props.ings,
             // in a production app you should calculate price on the backend to avoid the likelyhood of users manipulating the price on purchse
             price: this.props.price,
-            orderData: formData
+            orderData: formData,
+            userId: this.props.userId,
             
         }
 
@@ -208,6 +209,7 @@ const mapStateToProps = state => {
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
         token: state.auth.token,
+        userId: state.auth.userId,
     }
 }
 
