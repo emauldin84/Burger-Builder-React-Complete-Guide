@@ -29,7 +29,6 @@ export const purchaseBurger = (orderData, token) => {
         // must add .json to end of url for Firebase
         axios.post(`/orders.json?auth=${token}`, orderData)
             .then(response => {
-                console.log('response.data',response.data)
                 dispatch(purchaseBurgerSuccess(response.data.name, orderData ))
             })
             .catch(error => {
